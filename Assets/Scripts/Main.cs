@@ -7,16 +7,6 @@ using UnityEngine.UI;
 namespace DOD_BOOK
 {
 
-    struct StructExample
-    {
-        public int TestInt;
-
-        public StructExample(int testInt)
-        {
-            TestInt = testInt;
-        }
-    }
-
     public class Main : MonoBehaviour
     {
         public TextMeshProUGUI ResultText;
@@ -27,6 +17,13 @@ namespace DOD_BOOK
         public GameObject UI;
 
         int m_runTest = 0;
+
+        List<int> IntList1;
+        List<int> IntList2;
+        List<int> IntList3;
+        int[] IntArray1;
+        int[] IntArray2;
+        int[] IntArray3;
 
         private void Awake()
         {
@@ -39,6 +36,13 @@ namespace DOD_BOOK
                 UI.GetComponent<CanvasScaler>().matchWidthOrHeight = 1.0f;
             else
                 UI.GetComponent<CanvasScaler>().matchWidthOrHeight = 0.0f;
+
+            IntList1 = new List<int>(ArraySize);
+            IntList2 = new List<int>(ArraySize);
+            IntList3 = new List<int>(ArraySize);
+            IntArray1 = new int[ArraySize];
+            IntArray2 = new int[ArraySize];
+            IntArray3 = new int[ArraySize];
         }
 
         public void RunTest()
@@ -97,21 +101,14 @@ namespace DOD_BOOK
             {
                 ResultText.text += "\nTest 2 of 2: \n";
 
-                List<StructExample> IntList1 = new List<StructExample>(ArraySize);
-                List<StructExample> IntList2 = new List<StructExample>(ArraySize);
-                List<StructExample> IntList3 = new List<StructExample>(ArraySize);
-                StructExample[] IntArray1 = new StructExample[ArraySize];
-                StructExample[] IntArray2 = new StructExample[ArraySize];
-                StructExample[] IntArray3 = new StructExample[ArraySize];
-
                 for (int i = 0; i < ArraySize; i++)
                 {
-                    IntList1.Add(new StructExample(Mathf.FloorToInt(UnityEngine.Random.value * 1024)));
-                    IntList2.Add(new StructExample(Mathf.FloorToInt(UnityEngine.Random.value * 1024)));
-                    IntList3.Add(new StructExample(0));
-                    IntArray1[i] = new StructExample(Mathf.FloorToInt(UnityEngine.Random.value * 1024));
-                    IntArray2[i] = new StructExample(Mathf.FloorToInt(UnityEngine.Random.value * 1024));
-                    IntArray3[i] = new StructExample(0);
+                    IntList1.Add(Mathf.FloorToInt(UnityEngine.Random.value * 1024));
+                    IntList2.Add(Mathf.FloorToInt(UnityEngine.Random.value * 1024));
+                    IntList3.Add(0);
+                    IntArray1[i] = Mathf.FloorToInt(UnityEngine.Random.value * 1024);
+                    IntArray2[i] = Mathf.FloorToInt(UnityEngine.Random.value * 1024);
+                    IntArray3[i] = 0;
                 }
 
                 Double listTime = 0d;
@@ -123,12 +120,12 @@ namespace DOD_BOOK
 
                     time = Time.realtimeSinceStartupAsDouble;
                     for (int i = 0; i < ArraySize; i++)
-                        IntList3[i] = new StructExample(IntList1[i].TestInt + IntList2[i].TestInt);
+                        IntList3[i] = IntList1[i] + IntList2[i];
                     listTime += Time.realtimeSinceStartupAsDouble - time;
 
                     time = Time.realtimeSinceStartupAsDouble;
                     for (int i = 0; i < ArraySize; i++)
-                        IntArray3[i].TestInt = IntArray1[i].TestInt + IntArray2[i].TestInt;
+                        IntArray3[i] = IntArray1[i] + IntArray2[i];
                     arrayTime += Time.realtimeSinceStartupAsDouble - time;
                 }
 

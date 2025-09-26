@@ -393,8 +393,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResultText: {fileID: 2119983609}
   ButtonText: {fileID: 1959149589}
-  NumIterations: 10000
-  ArraySize: 10000
+  NumIterations: 1000
+  ArraySize: 100000
   UI: {fileID: 1352433060}
 --- !u!1 &1352433060
 GameObject:
